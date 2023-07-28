@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% load static thumbnail %} {% load fullurl %} {% load widget_tweaks %} {% load currency %} {% currency_context %} {% block link %}
+<title>Buy Games - VirtGold</title>
+<meta name="description" content="Buy Token with fast payout and various payment methods available at the best price in the market From a trusted website with over 5000+ Feedback over various platforms." />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:description" content="Buy Token with fast payout and various payment methods available at the best price in the market From a trusted website with over 5000+ Feedback over various platforms." />
+<meta property="og:site_name" content="VirtGold" />
+
+<meta name="robots" content="all" />
+<meta property="article:section" content="Showcase" />
+<meta property="og:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Buy Token with fast payout and various payment methods available at the best price in the market From a trusted website with over 5000+ Feedback over various platforms." />
+<meta name="twitter:title" content="Buy Games - VirtGold" />
+<meta name="twitter:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<style>
+    .input-hidden {
+        position: absolute;
+        left: -9999px;
+    }
+
+    input[type="radio"]:checked + label > img {
+        border: 1px solid #fff;
+        box-shadow: 0 0 3px 3px #090;
+    }
+
+    /* Stuff after this is only to make things more pretty */
+    input[type="radio"] + label > img {
+        border: 1px solid #444;
+        transition: 500ms all;
+        filter: brightness(60%);
+        cursor: pointer;
+    }
+
+    input[type="radio"]:checked + label > img {
+        transform: scale(1.08);
+        filter: brightness(100%);
+    }
+</style>
+{% endblock %} {% block body %}
+<section class="header">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="text-center">
+                    <h1>Any <span>Service Available</span> For All Games!</h1>
+                    <h3>Get your services instantly</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="partner_section">
+    <div class="container">
+        <form action="">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 mb-5" id="wowForm">
+                    <div class="row">
+                        {% for game in games %}
+                        <div class="col-6 col-md-4 mb-4">
+                            <div class="card">
+                                <img class="card-img-top" src="{{ game.image|thumbnail_url:'medium' }}" alt="{{game.title}}" />
+                                <div class="card-body">
+                                    <h5 class="card-title">{{game.title}}</h5>
+                                </div>
+                                <a href="{% url 'main:buy_games_detail_view' game.slug %}" class="btn btn_orange btn-block m-2">Buy Now</a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <h4 class="text-white">No Games Found!</h4>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

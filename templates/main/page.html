@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% load static %} {% load fullurl %} {% block link %}
+<title>{{page.title}} - VirtGold</title>
+<meta property="description" content="Please read our privacy policy before getting any of our service." />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Privacy Plicy - VirtGold" />
+<meta property="og:description" content="Please read our privacy policy before getting any of our service." />
+<meta property="og:site_name" content="VirtGold" />
+
+{% endblock %} {% block body %}
+<section class="my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-9 mb-4">
+                <h1>{{page.title}}</h1>
+            </div>
+            <div class="col-12 col-md-10 col-lg-9" style="overflow-wrap: break-word">{{page.content|safe}}</div>
+        </div>
+    </div>
+</section>
+<hr />
+{% endblock %}

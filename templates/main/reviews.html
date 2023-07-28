@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% load static %} {% load fullurl %} {% load crispy_forms_tags %} {% block link %}
+<title>{{title}} - VirtGold</title>
+<meta name="description" content="{{description}}" />
+{% autoescape off %}
+<meta name="keywords" content="{{tags|join:', '}}" />
+{% endautoescape %}
+<link rel="canonical" href="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="{{ogtype}}" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:site_name" content="VirtGold" />
+{% for tag in tags %}
+<meta property="article:tag" content="{{tag}}" />
+{% endfor %}
+<meta name="robots" content="all" />
+<meta property="article:section" content="Showcase" />
+<meta property="og:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="{{description}}" />
+<meta name="twitter:title" content="{{title}}" />
+<meta name="twitter:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+{% endblock %} {% block body %}
+<section class="header">
+    <div class="container">
+        <div class="row justify-content-center"></div>
+    </div>
+</section>
+<section class="view_section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mt-3">
+                {% if form.errors %} {% for field in form.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> {{field}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %} {% endif %}
+                <form method="post">
+                    {% csrf_token %} {% for field in form %}
+                    <div class="form-group mb-3">{{field|as_crispy_field}}</div>
+                    {% endfor %}
+                    <input type="submit" value="Add Review" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="service_section">
+    <div class="container mb-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-11">
+                <div class="text-center">
+                    <h3>Trusted By More Than <br /><span>3,000 Customer</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr2.png' %}" alt="#" />
+                    </div>
+                </div>
+            </div>
+            {% for review in reviews %}
+            <div class="col-md-4">
+                <div class="review_box">
+                    <p>{{review.feedback}}</p>
+                    <div class="review_flex">
+                        <img src="{% static 'assets/images/profile.png' %}" style="width: 60px" alt="#" />
+                        <div class="text">{{review.name}}<br /><span>{{review.location}}</span></div>
+                    </div>
+                    <img src="{% static 'assets/images/quote.png' %}" alt="VirtGold Reviews" class="quote" />
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if reviews.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg justify-content-center">
+            {% if reviews.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{reviews.previous_page_number}}"><i class="fa fa-angle-left"></i></a>
+            </li>
+            {% endif %} {% for i in reviews.paginator.page_range %} {% if reviews.number == i %}
+            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %} {% endfor %} {% if reviews.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{reviews.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}

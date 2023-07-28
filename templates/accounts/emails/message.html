@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% include 'accounts/footprint/head.html' %}
+
+<body>
+    <!-- Navigation -->
+    {% include 'accounts/footprint/navigation.html' %}
+    <!-- End of Navigation -->
+    <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="text-center">
+                {% if messages %}
+                {% for message in messages %}
+                <h1>{{bold}}</h1>
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% if btn %}
+                <a style="border:0.125rem solid #f3f7fd; color: #f3f7fd; " class="btn btn-outline-sm" href="{% url 'accounts:login' %}">Login</a>
+                {% endif %}
+            </div>
+            <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+    {% include 'accounts/footprint/footer.html' %}
+</body>
+
+</html>

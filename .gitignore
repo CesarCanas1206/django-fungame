@@ -1,0 +1,28 @@
+# Byte-compiled / optimized Python files
+*.pyc
+__pycache__/
+
+# Django-related files
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+
+# Static files
+staticfiles/
+
+# Environment-specific files
+.env
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# System-specific files
+.DS_Store
+Thumbs.db
+
+# database
+*.sqlite3.*
+*.sqlite3

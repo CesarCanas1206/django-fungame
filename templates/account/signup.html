@@ -1,0 +1,23 @@
+{% extends "account/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block head_title %}Signup {% endblock %} {% block inner %}
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <a href="/"><img src="{% static 'assets/images/logo.png' %}" class="avatar avatar-small cover mb-4 d-block mx-auto" alt="virtgold" /></a>
+    <h5 class="mb-3 text-center">Register your account</h5>
+
+    {{form|crispy}}
+    <!-- redirect value -->
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+
+    <button class="btn btn-primary w-100 mt-3" type="submit">Register</button>
+
+    <div class="col-12 text-center mt-3">
+        <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="{% url 'account_login' %}" class="text-dark fw-bold">Sign in</a></p>
+    </div>
+    <!--end col-->
+    <p class="mb-0 text-muted mt-3 text-center">© {% now 'Y' %} VirtGold.</p>
+</form>
+
+{% endblock %}

@@ -1,0 +1,290 @@
+{% extends "base.html" %} {% load static %} {% load fullurl thumbnail currency %} {% currency_context %} {% block link %}
+<title>VirtGold - Online Market for In-Game Boosting</title>
+<meta name="description" content="Virtgold is an online market for in-game boosting & services. with multiple payment options, you can browse over 10+ MMO's. virtgold your One Stop Shop" />
+{% autoescape off %}
+<meta name="keywords" content="{{tags|join:', '}}" />
+{% endautoescape %}
+<link rel="canonical" href="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="{{ogtype}}" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:site_name" content="VirtGold" />
+{% for tag in tags %}
+<meta property="article:tag" content="{{tag}}" />
+{% endfor %}
+<meta name="robots" content="all" />
+<meta property="article:section" content="Showcase" />
+<meta property="og:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="{{description}}" />
+<meta name="twitter:title" content="{{title}}" />
+<meta name="twitter:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{title}}",
+        "url": "{{ request.build_absolute_uri }}",
+        "description": "{{description}}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Saadat Ali"
+        },
+        "image": ["https://virtgold.s3.amazonaws.com/static/assets/images/logo.png"]
+    }
+</script>
+{% endblock %} {% block body %}
+<section class="header">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 my-5">
+                <div class="text-center">
+                    <h1 class="text-wrap">
+                        Helping <span>Buyers and Sellers</span> <br />
+                        Obtain their goals
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row" style="max-width: 1600px">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="bluebox d-flex flex-column justify-content-center align-items-center w-100" style="height: 90%">
+                        <p>To Browse our services or Sell to us, click this button</p>
+                        <div class="w-75">
+                            <a href="{% url 'main:sell_games_list_view' %}" class="btn_blue mb-3 w-100 px-1">SELL TO US</a>
+                            <a href="{% url 'main:buy_games_list_view' %}" class="btn_blue w-100 px-1">BUY FROM US</a>
+                        </div>
+                    </div>
+                </div>
+                {% for game in featured_games %}
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="{% cycle 'yellow_box border border-2 border-primary' 'bluebox' %} d-flex flex-column justify-content-center align-items-center w-100" style="height: 90%">
+                        <img width="350px" height="120px" src="{{ game.header_image.image|thumbnail_url:'large' }}" alt="Buy {{game.title}}" />
+                        <a href="{% url 'main:buy_games_detail_view' game.slug %}" class="btn_blue">Browse</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="rate_section">
+    <div class="container">
+        <!-- TrustBox widget - Micro Review Count -->
+        <div class="trustpilot-widget" data-locale="en-US" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="608ca2efdd75dc000164a949" data-style-height="24px" data-style-width="100%" data-theme="dark" data-style-alignment="center">
+            <a href="https://www.trustpilot.com/review/virtgold.com" target="_blank" rel="noopener">Trustpilot</a>
+        </div>
+        <!-- End TrustBox widget -->
+    </div>
+</section>
+
+{% if reviews %}
+<section class="service_section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-11">
+                <div class="text-center">
+                    <h3>Trusted By More Than <br /><span>3,000 Customer</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr2.png' %}" alt="VirtGold Customers" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="responsive2">
+                    {% for review in reviews %}
+                    <div>
+                        <div class="review_box">
+                            <p>{{review.feedback}}</p>
+                            <div class="review_flex">
+                                <img class="rounded-circle" data-holder-rendered="true" src="{% static 'assets/images/profile.png' %}" style="width: 60px" alt="{{review.name}}'s review about VirtGold" />
+                                <div class="text">{{review.name}}<br /><span>{{review.location}}</span></div>
+                            </div>
+                            <img src="{% static 'assets/images/quote.png' %}" alt="{{review.name}}'s review about VirtGold" class="quote" />
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-12 text-center">
+                    <a href="{% url 'main:reviews' %}" class="btn_blue">View More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<section class="select_section">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-11">
+                <div class="text-center mb-5">
+                    <h3>Why <span>Choose Us</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr.svg' %}" alt="VirtGold OSRS RS3" />
+                    </div>
+                    <p>Since our inception in 2020, VirtGold has been among the most reputable service options available for gamers. We are driven by our outstanding customer support alongside our dedication to offering customers the privacy and convenience they deserve at the most competitive prices available, guaranteed.</p>
+                </div>
+                <div class="text-center">
+                    <h3>Our <span>Core Values</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr.svg' %}" alt="VirtGold OSRS RS3" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="choose_box">
+                            <div class="img_box">
+                                <img src="{% static 'assets/images/choose1.png' %}" alt="VirtGold Trading" />
+                            </div>
+                            <h4>Security & Safety</h4>
+                            <p>Our pledge as an industry leader is to offer unparalleled security for customers. We take every available safety measure to ensure that your personal information remains secure so you can enjoy playing the games you love without worrying about your account safety.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="choose_box">
+                            <div class="img_box">
+                                <img src="{% static 'assets/images/choose3.png' %}" alt="VirtGold Live Support" />
+                            </div>
+                            <h4>Affordability</h4>
+                            <p>We pride ourselves on having the most affordable and competitive pricing available amongst competitors. We work diligently around the clock to ensure that our prices remain the lowest allowing you, the customer, to take advantage of the best pricing available.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="choose_box">
+                            <div class="img_box">
+                                <img src="{% static 'assets/images/choose2.png' %}" alt="VirtGold Automation" />
+                            </div>
+                            <h4>Speed</h4>
+                            <p>With some of the most streamlined service and payment options available, we can ensure that every single purchase that you, as a valued customer, make will also respect your time and get you back into your favorite games more quickly.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <div class="choose_box">
+                            <div class="img_box">
+                                <img src="{% static 'assets/images/choose4.png' %}" alt="VirtGold Automation" />
+                            </div>
+                            <h4>Customer Support</h4>
+                            <p>You aren’t just a customer when you purchase from VirtGold, but rather a valued member of the VirtGold family that aims to ensure that all of your questions and concerns are solved 24/7 by an actual human. We take customer support seriously and strive for excellence to ensure you’re cared for regardless of the circumstances.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if posts %}
+<section class="service_section bg_white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-12">
+                <div class="text-center">
+                    <h3>Our <span>FEATURED Blog</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr2.png' %}" alt="VirtGold Featured Blog" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-12 col-md-4">
+                <div class="blog_box">
+                    <a href="{% url 'blog:post' post.slug %}"><img class="card-img-top thumbnai" src="{{post.thumbnail.url}}" alt="{{post.title}}" /></a>
+                    <div class="text_box">
+                        <h5>{{post.created|date}}</h5>
+                        <h4>{{post.title}}</h4>
+                        <p>{{post.body|striptags|safe|truncatechars:120}} <a href="{% url 'blog:post' post.slug %}" class="card-link" style="text-decoration: none">Read More</a></p>
+
+                        <p></p>
+                        {% for tag in post.tags.all %}
+                        <a href="/blog/?tags={{tag.name}}" class="tag">{{tag.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-12 text-center">
+                <a href="{% url 'blog:archive' %}" class="btn_blue">View More</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %} {% endblock %} {% block script %}
+<script type="text/javascript">
+    $(".responsive").slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    dots: false,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ],
+    })
+</script>
+<script type="text/javascript">
+    $(".responsive2").slick({
+        dots: true,
+        infinite: false,
+        speed: 300,
+        arrows: false,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ],
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}")
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        stripe
+            .redirectToCheckout({
+                sessionId: "{{ session_id }}",
+            })
+            .then(function (result) {
+                // Handle any errors
+            })
+    })
+</script>

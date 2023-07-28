@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% load custom_tags humanize %} {% block body %}
+
+<div class="container min-vh-100">
+    <div class="card mt-5">
+        <div class="card-body">
+            <h4>Orders</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td style="max-width: 150px">{{order.order_id}}</td>
+                        <td>{{order.item}}</td>
+                        <td>{{order.currency|currency_symbol}}{{order.amount|intcomma}}</td>
+                        <td>{{order.get_status_display}}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <th colspan="4" class="text-center">No orders found</th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

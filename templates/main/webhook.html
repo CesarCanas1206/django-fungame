@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% load static %} {% load fullurl %} {% load currency %} {% currency_context %} {% block link %}
+<title>Payment Status - VirtGold</title>
+<!-- dont index this page -->
+<meta name="robots" content="noindex" />
+<!-- Event snippet for Payement Confirmed PageView conversion page -->
+<script>
+    gtag("event", "conversion", {send_to: "AW-11158115358/v-u7CPnL0bUYEJ6ozcgp"})
+</script>
+
+{% endblock %} {% block body %}
+<div class="container d-flex align-items-center justify-content-center" style="height: 800px">
+    <div class="col-md-6">
+        <div class="alert alert-success d-none" id="success"><strong>Congrats!</strong> Your Payment was verified successfully.</div>
+        <div class="card">
+            <div class="card-header bg- success text-center text-white">Payment Info</div>
+            <div class="card-body">
+                <div class="card-text">
+                    <p><strong>Game Title: </strong>{{db_info.item.title}}</p>
+                    <p><strong>Game Price: </strong>{{db_info.item.buy_price}}/{{db_info.item.unit}}</p>
+                    <p><strong>Payment ID: </strong>{{db_info.order_id}}</p>
+                    <p><strong>Status: </strong><span id="status-text">{{payment_details.payment_status}}</span></p>
+                    <p><strong>Your Email: </strong>{{payment_details.customer_details.email}}</p>
+                    <p><strong>Your IGN: </strong>{{payment_details.metadata.ign}}</p>
+                    <p><strong>Type: </strong>{{db_info.item.gold_type}}</p>
+                    <p><strong>Quantity: </strong>{{db_info.quantity}}{{db_info.item.unit}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="progress" id="progressbar">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success active" role="progressbar" aria-valuenow="100" aria-valuemin="100" aria-valuemax="100" style="width: 100%">Waiting for payment verification...</div>
+        </div>
+        <small class="text-muted" id="note-text"><strong>Note: </strong> Payment verification can take time, please don't leave this page</small>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    var myVar = ""
+
+    function getdata() {
+        $.ajax({
+            url: "{% url 'payment_status' pk=db_info.up_id %}",
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+                if (data.payment_status == "pending") {
+                    $("#status-text").text(data.status)
+                } else if (data.payment_status == "completed") {
+                    zE("webWidget", "chat:addTags", "paid")
+                    $("#status-text").text(data.status)
+                    $("#note-text").text("Your Payment was verified successfully.")
+                    $("#progressbar").addClass("d-none")
+                    $("#success").removeClass("d-none")
+                    zE("webWidget", "open")
+                    var message = `Hey, I have purchased,\nGame Title: {{db_info.item.title}} \nIGN: {{payment_details.metadata.ign}}\n{% if payment_details.metadata.region %}Region: {{payment_details.metadata.region}}\nServer: {{payment_details.metadata.server}}\n{% endif %}{% if payment_details.metadata.faction %}Faction: {{payment_details.metadata.faction}}\n{% endif %}Quantity: {{payment_details.metadata.quantity}}{{db_info.item.unit}}\nPayment Method: Coinbase\n`
+                    zE("webWidget", "chat:send", message)
+                    stoptime()
+                } else if (data.payment_status == "failed") {
+                    $("#status-text").text(data.status)
+                    $("#note-text").text("")
+                    $("#progressbar").addClass("d-none")
+                    $("#success").removeClass("d-none")
+                    zE("webWidget", "open")
+                    stoptime()
+                } else {
+                    stoptime()
+                }
+            },
+        })
+    }
+
+    function stoptime() {
+        clearInterval(myVar)
+    }
+    $(document).ready(getdata())
+    $(document).ready(function () {
+        myVar = setInterval("getdata()", 30000)
+    })
+</script>
+{% endblock %}

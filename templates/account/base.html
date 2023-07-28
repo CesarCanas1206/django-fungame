@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block body %}
+<section class="bg-home bg-circle-gradiant d-flex align-items-center min-vh-100">
+    <div class="bg-overlay bg-overlay-white"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="card form-signin p-4 rounded shadow w-50">
+                    <!-- non field error -->
+                    {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+                    <div class="alert bg-soft-danger fw-medium" role="alert">{{error|escape}}</div>
+                    {% endfor %} {% endif %}
+
+                    <!-- message -->
+                    {% if messages %} {% for message in messages %}
+                    <div class="alert bg-soft-{{message.tags}} fw-medium" role="alert">{{message}}</div>
+                    {% endfor %} {% endif %} {% block inner %} {% endblock inner %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end container-->
+</section>
+{% endblock body %}

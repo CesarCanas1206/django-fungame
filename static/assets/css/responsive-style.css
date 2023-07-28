@@ -1,0 +1,93 @@
+.visible-xs{
+	display: none !important;
+}
+.hidden-xs{
+	display: block !important;
+}
+@media(max-width: 767px){
+	.visible-xs{
+		display: block !important;
+	}
+	.hidden-xs{
+		display: none !important;
+	}
+}
+@media(max-width: 1440px){
+	html,body{
+		font-size: 14px;
+	}
+}
+@media(max-width: 1366px){
+	html,body{
+		font-size: 13px;
+	}
+}
+@media(max-width: 1280px){
+	html,body{
+		font-size: 12px;
+	}
+}
+@media(max-width: 1024px){
+	html,body{
+		font-size: 10px;
+	}
+}
+@media(max-width: 991px){
+	.navbar-light .navbar-nav.ms-auto{
+	    justify-content: flex-start;
+	    display: block;
+	}
+	.navbar-light .navbar-nav .nav-link.btn_orange{
+	    margin-left: 0;
+	    margin-top: 1rem;
+	}
+}
+@media(max-width: 767px){
+	html,body{
+		font-size: 14px;
+	}
+	.header h1{
+		font-size: 2rem;
+	}
+	.select_section .white_box .flexer .btn_green {
+	    flex: 0 0 87%;
+	}
+	.service_section form label{
+		margin-top: 1rem;
+	}
+	.partner_section .row2 .col{
+	    flex: 0 0 auto;
+	    width: 50%;
+	}
+	.rate_section .img_box{
+		height: auto;
+		margin: 1rem 0;
+	}
+	.service_section .review_box .quote{
+	    position: relative;
+	    margin-top: 1rem;
+	    right: initial;
+	    bottom: initial;
+	}
+	.slick-arrow{
+		display: none !important;
+	}
+	.header .gold_box .top2{
+	    display: block;
+	    text-align: center;
+	}
+	.header .gold_box .top2 .swap_icon{
+	    display: block;
+	    margin: 1rem auto;
+	}
+	.service_section h3{
+		font-size: 2rem;
+	}
+	.header .gold_box .top .price{
+	    padding: 1rem;
+	}
+	footer .col{
+	    flex: 0 0 auto;
+	    width: 100%;
+	}
+}

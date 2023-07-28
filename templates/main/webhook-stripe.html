@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} {% load fullurl %} {% load currency %} {% currency_context %} {% block link %}
+<title>Payment Status - VirtGold</title>
+<!-- dont index this page -->
+<meta name="robots" content="noindex" />
+
+<!-- Event snippet for Payement Confirmed PageView conversion page -->
+
+{% endblock %} {% block body %}
+<script>
+    gtag("event", "conversion", {send_to: "AW-11158115358/v-u7CPnL0bUYEJ6ozcgp"})
+</script>
+<div class="container d-flex align-items-center justify-content-center" style="height: 800px">
+    <div class="col-md-6">
+        <div class="alert alert-success d-none" id="success"><strong>Congrats!</strong> Your Payment was verified successfully.</div>
+        <div class="card">
+            <div class="card-header bg-success text-center text-white">Payment Info</div>
+            <div class="card-body">
+                <div class="card-text">
+                    <!-- db info comming from stripe order -->
+                    <p><strong>Game Title: </strong>{{db_info.item}}</p>
+                    <p><strong>Game Price: </strong>{{db_info.item.buy_price}}/{{db_info.item.unit}}</p>
+                    <p><strong>Payment ID: </strong>{{db_info.order_id}}</p>
+                    <p><strong>Status: </strong><span id="status-text">{{payment_details.payment_status}}</span></p>
+                    <p><strong>Your Email: </strong>{{payment_details.customer_details.email}}</p>
+                    <p><strong>Your IGN: </strong>{{payment_details.metadata.ign}}</p>
+                    <p><strong>Type: </strong>{{db_info.item.gold_type}}</p>
+                    <p><strong>Quantity: </strong>{{db_info.quantity}}{{db_info.item.unit}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+    $(function () {
+        function sell() {
+            var message = `Hey, I have purchased,\nEmail: {{payment_details.customer_details.email}}\nGame Title: {{payment_details.metadata.game_title}} \nIGN: {{payment_details.metadata.ign}}\n{% if payment_details.metadata.region %}Region: {{payment_details.metadata.region}}\nServer: {{payment_details.metadata.server}}\n{% endif %}{% if payment_details.metadata.faction %}Faction: {{payment_details.metadata.faction}}\n{% endif %}Quantity: {{payment_details.metadata.quantity}}{{db_info.item.unit}}\nPayment Method: Stripe\n`
+            zE("webWidget", "open")
+            zE("webWidget", "chat:send", message)
+        }
+        sell()
+    }) // end of ready function
+</script>
+
+{% endblock %}

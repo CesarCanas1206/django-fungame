@@ -1,0 +1,23 @@
+{% extends "account/base.html" %} {% load i18n static %} {% load account socialaccount %} {% load crispy_forms_tags %} {% block head_title %}{% translate "Sign In" %}{% endblock %} {% block inner %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %} {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <a href="/"><img src="{% static 'assets/images/logo.png' %}" class="avatar avatar-small cover mb-4 d-block mx-auto" alt="virtgold" /></a>
+    <h5 class="mb-3 text-center">Please sign in</h5>
+
+    {{form|crispy}}
+
+
+    <button class="btn btn-primary w-100 mt-3" type="submit">Sign in</button>
+    <p class="forgot-pass mb-0"><a href="{% url 'account_reset_password' %}" class="text-dark small fw-bold">Forgot password ?</a></p>
+    <div class="col-12 text-center mt-3">
+        <p class="mb-0"><small class="text-dark me-2">Don't have an account ?</small> <a href="{% url 'account_signup' %}" class="text-dark fw-bold">Sign Up</a></p>
+    </div>
+    <!--end col-->
+
+    <p class="mb-0 text-muted mt-3 text-center">© {% now 'Y' %} VirtGold.</p>
+</form>
+
+{% endblock %}

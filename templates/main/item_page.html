@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% extends "base.html" %} {% load static %} {% load fullurl %} {% load currency %} {% currency_context %} {% block link %}
+<title>{{title}} - VirtGold</title>
+<meta name="description" content="{{description}}" />
+{% autoescape off %}
+<meta name="keywords" content="{{tags|join:', '}}" />
+{% endautoescape %}
+<link rel="canonical" href="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="{{ogtype}}" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:site_name" content="VirtGold" />
+{% for tag in tags %}
+<meta property="article:tag" content="{{tag}}" />
+{% endfor %}
+<meta name="robots" content="all" />
+<meta property="article:section" content="Showcase" />
+<meta property="og:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="{{description}}" />
+<meta name="twitter:title" content="{{title}}" />
+<meta name="twitter:image" content="https://virtgold.s3.amazonaws.com/static/assets/images/logo.png" />
+{% endblock %} {% block body %}
+<!-- Items -->
+<section class="select_section select_section2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-11">
+                <div class="text-center">
+                    <h3>SELECT YOUR <span>ITEMS</span></h3>
+                    <div class="hr">
+                        <img src="{% static 'assets/images/hr.svg' %}" alt="#" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    {% for item in items %}
+                    <div class="col-12 col-md-3 mb-3">
+                        <form action="/" class="itemForm">
+                            <div class="white_box">
+                                <div class="img_box">
+                                    <img src="{{item.thumbnail.url}}" alt="buy {{item.title}}" />
+                                </div>
+                                <div class="bot item">
+                                    <div class="price">{{CURRENCY.symbol}} {% change_currency item.price CURRENCY.code %}</div>
+                                    <div class="item_name">{{item.title}}</div>
+                                    <input type="hidden" name="title" value="{{item.title}}" />
+                                    <div class="form-group mx-0 my-2 p-1 bg-light">
+                                        <input type="number" name="quantity" class="form-control" placeholder="Quantity" required="required" style="background-color: #f7f7f8" />
+                                    </div>
+                                    <input type="submit" class="btn_green btn-block w-100" value="Buy Now" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if items.has_other_pages %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg justify-content-center">
+                        {% if items.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{items.previous_page_number}}"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                        {% endif %} {% for i in items.paginator.page_range %} {% if items.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                        {% endif %} {% endfor %} {% if items.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{items.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const buttons = document.getElementsByClassName("itemForm")
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("submit", function (e) {
+            e.preventDefault()
+            var title = $(this).closest("form").find("[name=title]").val()
+            var quantity = $(this).closest("form").find("[name=quantity]").val()
+            buy("Hi, I want to buy following item: \nTitle: " + title + "\nQuantity: " + quantity)
+        })
+    }
+    // send zendesk message
+    function buy(chat) {
+        zE("webWidget", "open")
+        zE("webWidget", "chat:send", chat)
+    }
+</script>
+{% endblock %}

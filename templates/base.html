@@ -1,0 +1,275 @@
+{% load static thumbnail %} {% spaceless %}
+<!DOCTYPE html>
+{% load currency %} {% currency_context %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png" sizes="32x32" />
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive-style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+
+        <!-- Google Tag Manager -->
+        <script>
+            ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
+                w[l].push({
+                    "gtm.start": new Date().getTime(),
+                    event: "gtm.js",
+                })
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : ""
+                j.async = true
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl
+                f.parentNode.insertBefore(j, f)
+            })(window, document, "script", "dataLayer", "GTM-KWNBPWD")
+        </script>
+
+        <!-- End Google Tag Manager -->
+
+        <!-- Start of virtgoldhelp Zendesk Widget script -->
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=fa14dab8-3500-4b4d-8dbd-9a28c9ef2d82"></script>
+        <!-- End of virtgoldhelp Zendesk Widget script -->
+        {% block link %} {% endblock %}
+    </head>
+
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNBPWD" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ8LHRC4PT"></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag("js", new Date())
+
+            gtag("config", "G-LZ8LHRC4PT")
+        </script>
+        <style>
+            .blink-style h5 {
+                color: #1b32d8f7;
+                animation: blink-text 1.9s linear infinite;
+            }
+
+            @keyframes blink-text {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
+            }
+        </style>
+        <section class="nav_section">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/"><img src="{% static 'assets/images/logo.png' %}" alt="VirtGold Logo" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <div class="blink-style mt-2">
+                                    <h5>Now accepting Credit Card and other payment methods</h5>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="trustpilot-widget" data-locale="en-US" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="608ca2efdd75dc000164a949" data-style-height="24px" data-style-width="100%" data-theme="light" data-style-alignment="center">
+                                    <a href="https://www.trustpilot.com/review/virtgold.com" target="_blank" rel="noopener">Trustpilot</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.discord.gg/osrsgp" target="_blank" rel="noindex">
+                                    <img src="{% static 'assets/images/discord.svg' %}" alt="Virtgold Discord" />
+                                </a>
+                            </li>
+
+                            {% comment %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle lan" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {% with 'assets/flags/'|add:CURRENCY_CODE|add:'.png' as image_static %}
+                                    <img src="{% static image_static %}" alt="{{CURRENCY_CODE}}" style="width: 27px" height="17px" />
+                                    {% endwith %} {{CURRENCY_CODE}}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {% for currency in CURRENCIES %}
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'currencies_set_currency' %}?currency_code={{currency.code}}">
+                                            {% with 'assets/flags/'|add:currency.code|add:'.png' as image_static %}
+                                            <img class="mb-1" src="{% static image_static %}" alt="{{currency.code}}" style="width: 27px" height="17px" />
+                                            {% endwith %} {{currency.code}}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endcomment %}
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="nav-link btn_grey dropdown-toggle" type="button" id="sellBtn" data-bs-toggle="dropdown" aria-expanded="false">Sell</button>
+                                    <ul class="dropdown-menu dropdown-menu-end nav_section mt-4 px-0" style="width: max-content" aria-labelledby="sellBtn">
+                                        {% for game in request.games %}
+                                        <li>
+                                            <a class="dropdown-item p-2" href="{% url 'main:sell_games_detail_view' game.slug %}"><img src="{{ game.image|thumbnail_url:'icon' }}" class="rounded" alt="{{game.title}}" /> {{game.title}}</a>
+                                        </li>
+                                        {% endfor %}
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'main:sell_games_list_view' %}">view all...</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="nav-link btn_orange dropdown-toggle" type="button" id="buyBtn" data-bs-toggle="dropdown" aria-expanded="false">Buy</button>
+                                    <ul class="dropdown-menu dropdown-menu-end nav_section mt-4 px-0" style="width: max-content" aria-labelledby="buyBtn">
+                                        {% for game in request.games %}
+                                        <li>
+                                            <a class="dropdown-item p-2" href="{% url 'main:buy_games_detail_view' game.slug %}"><img class="rounded" src="{{ game.image|thumbnail_url:'icon' }}" class="d-inline-block" alt="{{game.title}}" /> {{game.title}}</a>
+                                        </li>
+                                        {% endfor %}
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'main:buy_games_list_view' %}">view all...</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- show sign in if not authenticated else show logout -->
+                            {% if not request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link btn_orange" href="{% url 'account_login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn_orange text-nowrap" href="{% url 'account_signup' %}">Sign Up</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link btn_orange" href="{% url 'account_profile' %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn_orange bg-danger text-white" href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+        {% block body %} {% endblock %}
+        <div class="modal fade" tabindex="-1" id="tosModel">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Please Note!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center mt-2">
+                            <p>By clicking Buy Now Button, I acknowledge that I have read and accepted <a class="inline" target="_blank" href="/page/terms-of-service/">terms of service</a> including Return/Refund policy</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="logo">
+                                    <img src="{% static 'assets/images/logo.png' %}" alt="VirtGold Logo" />
+                                </a>
+                            </div>
+                            <div class="col">
+                                <h4>Feedback</h4>
+                                <ul>
+                                    <li><a href="https://www.sythe.org/threads/virtgold-vouch-thread">Sythe</a></li>
+                                    <!-- <li><a href="https://dreambot.org/forums/index.php">Dreambot</a></li> -->
+                                    <li><a href="https://osbot.org/forum/profile/217087-virtgold">Osbot</a></li>
+                                    <!-- <li><a href="https://community.tribot.org/profile/130825-virt/content/?change_section=1">Tribot</a></li> -->
+                                </ul>
+                            </div>
+
+                            <div class="col">
+                                <h4>Information</h4>
+                                <ul>
+                                    {% for page in request.pages %}
+                                    <li><a href="{{page.get_absolute_url}}">{{page.title}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4>Trade</h4>
+                                <ul>
+                                    <li><a href="{% url 'main:sell_games_list_view' %}">Sell</a></li>
+                                    <li><a href="{% url 'main:buy_games_list_view' %}">Buy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4>Follow Us</h4>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="https://www.facebook.com/profile.php?id=100094400867355" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://www.instagram.com/virtgold" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://www.twitter.com/virtgold" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://www.linkedin.com/in/virt-gold-inc-791b9b251/" target="_blank" rel="nofollow"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="https://www.threads.net/@virtgold" target="_blank" rel="nofollow"><i class="fa fa-at"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="trustpilot-widget" data-locale="en-US" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="608ca2efdd75dc000164a949" data-style-height="24px" data-style-width="100%" data-theme="light" data-style-alignment="center">
+                            <a href="https://www.trustpilot.com/review/virtgold.com" target="_blank" rel="noopener">Trustpilot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bot">
+                <p>
+                    ©
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    VIRTGOLD
+                </p>
+            </div>
+        </footer>
+        <script type="text/javascript" src="{% static 'assets/js/jquery-3.3.1.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/js/popper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/js/slick.min.js' %}"></script>
+        <!-- TrustBox script -->
+        <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+        <!-- End TrustBox script -->
+        {% block script %} {% endblock %}
+    </body>
+</html>
+{% endspaceless %}

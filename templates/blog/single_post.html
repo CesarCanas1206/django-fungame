@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load fullurl %}
+{% block link %}
+<title>{{post.title}} - VirtGold</title>
+{% if post.meta_description %}
+<meta property="description" content="{{post.meta_description|truncatechars:170}}" />
+{% else %}
+<meta property="description" content="{{post.body|striptags|safe|truncatechars:170}}" />
+{% endif %}
+{% autoescape off %}
+<meta name="keywords" content="{{tags|join:', '}}" />
+{% endautoescape %}
+<link rel="canonical" href="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{post.title}}" />
+{% if post.meta_description %}
+<meta property="og:description" content="{{post.meta_description|truncatechars:170}}" />
+{% else %}
+<meta property="og:description" content="{{post.body|striptags|safe|truncatechars:170}}" />
+{% endif %}
+<meta property="og:url" content="{% buildfullurl article.get_absolute_url %}" />
+<meta property="og:site_name" content="VirtGold" />
+{% if post.meta_tags_list %}
+{% for tag in post.meta_tags_list %}
+<meta property="article:tag" content="{{tag}}" />
+{% endfor %}
+{% else %}
+{% for tag in post.tags.all %}
+<meta property="article:tag" content="{{tag}}" />
+{% endfor %}
+{% endif %}
+<meta name="robots" content="all">
+<meta property="article:section" content="Showcase" />
+<meta property="og:image" content="{{post.thumbnail.url}}" />
+<meta name="twitter:card" content="summary_large_image" />
+{% if post.meta_description %}
+<meta property="twitter:description" content="{{post.meta_description|truncatechars:170}}" />
+{% else %}
+<meta property="twitter:description" content="{{post.body|striptags|safe|truncatechars:170}}" />
+{% endif %}
+<meta name="twitter:title" content="{{post.title}}" />
+<meta name="twitter:image" content="{{post.thumbnail.url}}" />
+{% endblock %}
+{% block body %}
+<section class="my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-9 mb-4">
+                <h1>{{post.title}}</h1>
+            </div>
+            <div class="col-12 col-md-10 col-lg-9 mb-4">
+                <img class="post-thumbnail" src="{{post.thumbnail.url}}" alt="{{post.thumbnail.title}}">
+            </div>
+            <div class="col-12 col-md-10 col-lg-9" style="overflow-wrap: break-word;">
+                {{post.body|safe}}
+            </div>
+            <div class="col-12 col-md-10 col-lg-9">
+                {% if post.tags.all %}
+                <p class="h5">Tags:</p>
+                {% for tag in post.tags.all %}
+                <a href="/blog/?tags={{tag.name}}" class="tag">{{tag.name}}</a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

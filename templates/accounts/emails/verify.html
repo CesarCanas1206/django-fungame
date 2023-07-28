@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hi {{ user.full_name }},
+
+You registered an account on Earn Withdraw, before being able to use your account you need to verify that this is your email address by clicking on the link bellow.
+
+http://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
+
+Kind Regards, Earn Withdraw Team
+{% endautoescape %}
+
+
+
+
+

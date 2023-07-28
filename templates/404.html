@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>404 - Page Not Found</title>
+
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        body {
+            padding: 0;
+            margin: 0
+        }
+
+        #notfound {
+            position: relative;
+            height: 100vh
+        }
+
+        #notfound .notfound {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)
+        }
+
+        .notfound {
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            line-height: 1.4
+        }
+
+        .notfound .notfound-404 {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 50px
+        }
+
+        .notfound .notfound-404>div:first-child {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: #ffa200;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            border: 5px dashed #000;
+            border-radius: 5px
+        }
+
+        .notfound .notfound-404>div:first-child:before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            top: -5px;
+            -webkit-box-shadow: 0 0 0 5px rgba(0, 0, 0, .1) inset;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, .1) inset;
+            border-radius: 5px
+        }
+
+        .notfound .notfound-404 h1 {
+            font-family: cabin, sans-serif;
+            color: #000;
+            font-weight: 700;
+            margin: 0;
+            font-size: 90px;
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            left: 50%;
+            text-align: center;
+            height: 40px;
+            line-height: 40px
+        }
+
+        .notfound h2 {
+            font-family: cabin, sans-serif;
+            font-size: 33px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 7px
+        }
+
+        .notfound p {
+            font-family: cabin, sans-serif;
+            font-size: 16px;
+            color: #000;
+            font-weight: 400
+        }
+
+        .notfound a {
+            font-family: cabin, sans-serif;
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #8f8f8f;
+            border: none;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            -webkit-transition: .2s all;
+            transition: .2s all
+        }
+
+        .notfound a:hover {
+            background-color: #2c2c2c
+        }
+    </style>
+
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+
+    <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <meta name="robots" content="noindex, follow">
+    <script nonce="6c22ccc3-b6f2-4632-a90b-7b961bc54b7f">(function (w, d) { !function (f, g, h, i) { f[h] = f[h] || {}; f[h].executed = []; f.zaraz = { deferred: [], listeners: [] }; f.zaraz.q = []; f.zaraz._f = function (j) { return function () { var k = Array.prototype.slice.call(arguments); f.zaraz.q.push({ m: j, a: k }) } }; for (const l of ["track", "set", "debug"]) f.zaraz[l] = f.zaraz._f(l); f.zaraz.init = () => { var m = g.getElementsByTagName(i)[0], n = g.createElement(i), o = g.getElementsByTagName("title")[0]; o && (f[h].t = g.getElementsByTagName("title")[0].text); f[h].x = Math.random(); f[h].w = f.screen.width; f[h].h = f.screen.height; f[h].j = f.innerHeight; f[h].e = f.innerWidth; f[h].l = f.location.href; f[h].r = g.referrer; f[h].k = f.screen.colorDepth; f[h].n = g.characterSet; f[h].o = (new Date).getTimezoneOffset(); if (f.dataLayer) for (const s of Object.entries(Object.entries(dataLayer).reduce(((t, u) => ({ ...t[1], ...u[1] })), {}))) zaraz.set(s[0], s[1], { scope: "page" }); f[h].q = []; for (; f.zaraz.q.length;) { const v = f.zaraz.q.shift(); f[h].q.push(v) } n.defer = !0; for (const w of [localStorage, sessionStorage]) Object.keys(w || {}).filter((y => y.startsWith("_zaraz_"))).forEach((x => { try { f[h]["z_" + x.slice(7)] = JSON.parse(w.getItem(x)) } catch { f[h]["z_" + x.slice(7)] = w.getItem(x) } })); n.referrerPolicy = "origin"; n.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(f[h]))); m.parentNode.insertBefore(n, m) };["complete", "interactive"].includes(g.readyState) ? zaraz.init() : f.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+</head>
+
+<body>
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <div></div>
+                <h1>404</h1>
+            </div>
+            <h2>Page not found</h2>
+            <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+            <a href="/">home page</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
