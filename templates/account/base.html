@@ -10,7 +10,6 @@
                     <div class="alert bg-soft-danger fw-medium" role="alert">{{error|escape}}</div>
                     {% endfor %} {% endif %}
 
-                    <!-- message -->
                     {% if messages %} {% for message in messages %}
                     <div class="alert bg-soft-{{message.tags}} fw-medium" role="alert">{{message}}</div>
                     {% endfor %} {% endif %} {% block inner %} {% endblock inner %}
